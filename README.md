@@ -11,6 +11,9 @@
   <a href="#getting-started">Getting Started</a>
 </p>
 
+## Live
+🌐 [travelcrew.org](https://travelcrew.org)
+
 ## Demo
 
 **Demo video:** [_YouTube Link_](https://youtu.be/jdrAwScpedk)
@@ -46,15 +49,19 @@
 
 - **Nodejs + Express** (REST API)
 - **PostgreSQL + Sequelize** (Database/ORM)
-- **Nodemailer** (Email invite service)
+- **Resend** (Email invite service)
 - **JWT** (Authentication)
+
+## Deployment
+The app is deployed on AWS at [travelcrew.org](https://travelcrew.org).
+
+- **EC2** — Node.js server
+- **RDS** — managed PostgreSQL database
+- **Nginx** — reverse proxy with SSL termination, serves static files directly from disk 
 
 ## Getting Started
 
 ### Prerequisites
-
-This project currently runs **locally only** 
-To run it on your machine, you’ll need:
 
 - **Node.js + PostgreSQL**
 
@@ -107,10 +114,6 @@ npm run dev
 - Frontend: `http://localhost:5173`
 - Backend: `http://localhost:3000`
 
-
-## Remaining Tasks
-
-- [ ] **Deployment:** Make the app accessible to the public. 
 
 ## Project Context
 
