@@ -123,7 +123,10 @@ export default function AuthPage() {
               {error}
             </div>
           )}
-          <form className="space-y-4" onSubmit={handleSubmit}>
+          <form
+            className="space-y-4"
+            onSubmit={handleSubmit}
+          >
             {!isLogin && (
               <div>
                 <label

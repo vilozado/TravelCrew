@@ -19,7 +19,7 @@ export const getTrips = async (req: Request, res: Response) => {
         },
       ],
       where: {
-        ownerId: { [Op.ne]: req.user!.id }, //Op.ne means not equal so this will exclude trips you are not the owner of.
+        ownerId: { [Op.ne]: req.user!.id },
       },
       order: [['startDate', 'ASC']]
     });
@@ -105,7 +105,7 @@ export const deleteTrip = async (req: Request, res: Response) => {
     if (!deleted) {
       return res.status(404).json({msg: "Trip not found"});
     }
-    res.status(204).json({ msg: "Trip deleted successfully!" });
+    res.status(200).json({msg: "Trip deleted successfully" });
   } catch (error) {
     console.error(error);
     res.status(500).json({ msg: "Internal Server Error" });

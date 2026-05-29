@@ -1,23 +1,26 @@
 import { useEffect, useRef } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { acceptInvite } from "../services/emailService";
+import { currentUser } from "../services/auth";
 
 export default function AcceptInvite() {
   const [params] = useSearchParams();
   const navigate = useNavigate();
   const hasRequested = useRef(false);
-  const isAuthenticated = !!localStorage.getItem("token"); // Check if the user has a session token/is logged in
 
   const token = params.get("token"); // Get the invite token from the URL
 
   useEffect(() => {
     // If the user is authenticated and there's a token, we can accept the invite
     const joinTrip = async () => {
-      if (!isAuthenticated) {
+      if (!token || hasRequested.current) return;
+
+      const user = await currentUser();
+
+      if (!user || !user.id) {
         navigate("/", { state: { from: `/accept-invite?token=${token}` } });
         return;
       }
-      if (!token || hasRequested.current) return;
       hasRequested.current = true;
 
       try {
@@ -29,7 +32,7 @@ export default function AcceptInvite() {
       }
     };
     joinTrip();
-  }, [token, navigate, isAuthenticated]);
+  }, [token, navigate,]);
 
   return (
     <div className="flex justify-center items-center h-screen">

@@ -3,7 +3,7 @@ import { createTrip, updateTrip } from "../services/tripService";
 import type { TripData } from "../types/tripData";
 import { format } from "date-fns";
 
-interface FormProp {
+interface FormProps {
   onClose: () => void;
   onTripCreate?: () => void;
   trip?: TripData;
@@ -14,16 +14,16 @@ export default function TripForm({
   onTripCreate,
   trip,
   onTripEdit,
-}: FormProp) {
+}: FormProps) {
   const [formData, setFormData] = useState({
-    destination: trip ? trip.destination : "",
-    startDate: trip ? trip.startDate : "",
-    endDate: trip ? trip.endDate : "",
+    destination: trip?.destination ?? "",
+    startDate: trip?.startDate ?? "",
+    endDate: trip?.endDate ?? "",
   });
 
   const today = format(new Date(), "yyyy-MM-dd");
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   const handleSubmit = async (e: React.SubmitEvent) => {
@@ -82,7 +82,7 @@ export default function TripForm({
                 className="text-primary-txt mt-1 p-2 w-full border rounded-md focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 transition-colors duration-300 cursor-text"
                 value={formData.destination}
                 onChange={handleChange}
-                disabled={!!trip}
+                disabled={Boolean(trip)}
                 required
               />
             </div>

@@ -45,13 +45,45 @@ export const login = async (req: Request, res: Response) => {
     if (!isValid) return res.status(401).json({ msg: "Invalid credentials" });
 
     // if password is okay generate JWT token
-    const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET as string, {
-      expiresIn: "1h",
+    if (!process.env.JWT_SECRET) {
+      return res.status(500).json({ msg: "JWT secret not configured" });
+    }
+
+    const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
+      expiresIn: "3h",
     });
 
-    res.status(200).json({ name: user.name, token }); //make sure no sensitive info is sent back!
+    //set cookie
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+      maxAge: 1000 * 60 * 60 * 3, // 3 hours
+    });
+    res.status(200).json({ name: user.name }); //make sure no sensitive info is sent back!
   } catch (error) {
     console.error(error);
     res.status(500).json({ msg: "Internal Server Error" });
   }
+};
+
+export const logout = (req: Request, res: Response) => {
+  try {
+    res.clearCookie("token", {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+    });
+    res.status(200).json({ msg: "Logged out" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ msg: "Internal Server Error" });
+  }
+};
+
+export const checkUser = (req: Request, res: Response) => {
+  if (!req.user) {
+    return res.status(401).json({msg: "Not authenticated"});
+  }
+  res.json({ user: req.user });
 };

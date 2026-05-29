@@ -52,7 +52,7 @@ export const editActivity = async (req:Request, res:Response) => {
       return res.status(404).json({msg: "Activity not found"});
     }
 
-    res.status(200).json({msg: "Activity updated"})
+    res.status(200).json(edited)
   } catch (error) {
     console.error(error);
     res.status(500).json({msg: "Internal Server Error"});
@@ -67,7 +67,7 @@ export const deleteActivity = async (req: Request, res: Response) => {
     if (!deleted) {
       return res.status(404).json({msg: "Activity not found"});
     }
-    res.status(204).json({msg: "Activity deleted"});
+    res.status(200).json({msg: "Activity deleted successfully"});
   } catch (error) {
     console.error(error);
     res.status(500).json({msg: "Internal Server Error"});

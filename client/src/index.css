@@ -24,7 +24,7 @@ body {
 
 .calendar-wrapper .fc-daygrid-day-frame {
   padding: 5px;
-  max-height: 40px !important;
+  max-height: 40px !important; 
 }
 
 .calendar-wrapper .fc-daygrid-day-number {
@@ -47,7 +47,7 @@ body {
   display: none;
 }
 .calendar-wrapper .fc-button {
-  background: var(--secondary-bg);;
+  background: var(--secondary-bg);
   border: none;
   color: var(--text-color);
   border-radius: 6px;

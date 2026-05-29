@@ -1,4 +1,4 @@
-import { useEffect, useState, } from "react";
+import { useEffect, useState } from "react";
 import type { ActivityData } from "../types/activityData";
 import { createActivity, editActivity } from "../services/activityService";
 
@@ -36,7 +36,7 @@ export default function ActivityForm({
   }, [activity]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   const handleSubmit = async (e: React.SubmitEvent) => {
@@ -98,7 +98,7 @@ export default function ActivityForm({
                 id="location"
                 name="location"
                 placeholder="ex: The Louvre"
-                className="text-primary-txt mt-1 p-2 w-full border rounded-md focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 transition-colors duration-300 cursor-pointer"
+                className="text-primary-txt mt-1 p-2 w-full border rounded-md focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 transition-colors duration-300 cursor-text"
                 value={formData.location}
                 onChange={handleChange}
                 required

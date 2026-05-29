@@ -16,20 +16,17 @@ export default function Dashboard() {
     return localStorage.getItem("userName") || "";
   });
 
-  useEffect(() => {
-    const fetchTrips = async () => {
-      const data = await getTrips();
-      setOwnTrips(data.ownTrips);
-      setMemberTrips(data.memberTrips);
-    };
-    fetchTrips();
-  }, []);
-
-  const refreshTrips = async () => {
+  const fetchTrips = async () => {
     const data = await getTrips();
     setOwnTrips(data.ownTrips);
     setMemberTrips(data.memberTrips);
   };
+
+  useEffect(() => {
+     // eslint-disable-next-line react-hooks/set-state-in-effect
+    fetchTrips();
+  }, []);
+
 
   //combine trips you own and trips you are a member of for calendar view
   const allTrips = [...ownTrips, ...memberTrips];
@@ -51,7 +48,6 @@ export default function Dashboard() {
       <NavBar />
       <div className="bg-primary min-h-screen">
         <div className="flex justify-between items-center container mx-auto mb-6 pb-4 pt-5 border-b border-mist-300">
-          {" "}
           <div className="flex flex-col justify-center">
             <span className="text-md text-primary-txt">Welcome back,</span>
             <h1 className="font-semibold text-2xl text-primary-txt">{userName.split(" ")[0]}</h1>
@@ -66,9 +62,9 @@ export default function Dashboard() {
         <div className="container mx-auto grid lg:grid-cols-[1fr_320px] gap-8 pb-10">
           <div className="flex flex-col gap-10">
             <div>
-              <h1 className="mb-4 text-lg font-semibold text-primary-txt">
+              <h2 className="mb-4 text-lg font-semibold text-primary-txt">
                 Your Upcoming Trips
-              </h1>
+              </h2>
               {ownTrips.length > 0 ? (
                 <div className="flex flex-wrap gap-5">
                   {ownTrips.map((trip) => (
@@ -82,9 +78,9 @@ export default function Dashboard() {
               )}
             </div>
             <div>
-              <h1 className="mb-4 text-lg font-semibold text-primary-txt">
+              <h2 className="mb-4 text-lg font-semibold text-primary-txt">
                 Shared With You
-              </h1>
+              </h2>
               {memberTrips.length > 0 ? (
                 <div className="flex flex-wrap gap-5">
                   {memberTrips.map((trip) => (
@@ -101,7 +97,7 @@ export default function Dashboard() {
           {isSeen && (
             <TripForm
               onClose={() => setIsSeen(false)}
-              onTripCreate={refreshTrips}
+              onTripCreate={fetchTrips}
             />
           )}
           <div>

@@ -17,6 +17,7 @@ export default function TripCard({ trip }: TripCardProps) {
       className="relative rounded-xl flex flex-col w-60 cursor-pointer shadow-[0_4px_10px_rgba(0,0,0,0.50)] transition duration-200 hover:scale-110 overflow-hidden"
     >
       <div className="bg-linear-to-br from-orange-400 to-rose-500 h-50 w-full"></div>
+      {/* Overlay content */}
       <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-2">
         <div className="flex flex-col items-center gap-2">
           <div className="text-white text-2xl">

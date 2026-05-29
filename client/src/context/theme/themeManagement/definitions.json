@@ -1,0 +1,10 @@
+{
+  "colors": {
+    "primary": "var(--primary)",
+    "secondary": "var(--secondary)",
+    "tertiary": "var(--tertiary)",
+    "light-dark": "var(--light-dark)",
+    "primary-txt": "var(--primary-txt)",
+    "secondary-txt": "var(--secondary-txt)"
+  }
+}

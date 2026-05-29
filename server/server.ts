@@ -7,16 +7,18 @@ import inviteRoutes from "./routes/inviteRoutes";
 import { sequelize } from "./models/index";
 import helmet from "helmet";
 import rateLimit from "express-rate-limit";
-import dotenv from 'dotenv'
+import dotenv from 'dotenv';
+import cookieParser from 'cookie-parser';
 
 dotenv.config();
 
 const app = express();
-const PORT = 3000;
-
+const PORT = process.env.PORT || process.env.SERVER_PORT || 3000;
+(app as any).set("trust proxy", 1);
 app.use(helmet());
+app.use(cookieParser());
 app.use(cors({
-  origin: "http://localhost:5173",
+  origin: process.env.CLIENT_URL,
   credentials: true,
 }));
 app.use(express.json());

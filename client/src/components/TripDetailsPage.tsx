@@ -153,19 +153,19 @@ export default function TripDetails() {
           </div>
           <div className="flex items-center gap-1 pl-10">
             <CiCalendar className="text-white" />
-            <h1 className="text-white leading-10 text-sm">
+            <h2 className="text-white leading-10 text-sm">
               {format(parseISO(trip.startDate), "MMM dd, yyyy")} –{" "}
               {format(parseISO(trip.endDate), "MMM dd, yyyy")}
-            </h1>
+            </h2>
           </div>
         </div>
       </div>
       <div className="container mx-auto grid lg:grid-cols-[1fr_450px] gap-8">
         <div>
           <div className="p-2">
-            <h1 className="font-semibold text-xl text-primary-txt">
+            <h2 className="font-semibold text-xl text-primary-txt">
               Itinerary
-            </h1>
+            </h2>
           </div>
           {getTripDays(
             // date is stored as a string in the database and needs to be parsed to have the activites display the correct dates
@@ -287,9 +287,9 @@ export default function TripDetails() {
               {showInviteForm && (
                 <Invite onClose={() => setshowInviteForm(false)} tripId={Number(id)} />
               )}
-              <h1 className="mt-2.25 font-bold text-xl mb-2.5 text-primary-txt">
+              <h2 className="mt-2.25 font-bold text-xl mb-2.5 text-primary-txt">
                 The Crew
-              </h1>
+              </h2>
             </div>
             {trip.Users.map((member) => (
               <div

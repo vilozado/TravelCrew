@@ -19,7 +19,7 @@ vi.mock("../controllers/tripController", () => ({
 
 vi.mock("../middleware/authMiddleware", () => ({
   authMiddleware: (req: Request, res: Response, next: NextFunction) => {
-    req.user = { id: "1" };
+    req.user = { id: 1 };
     next();
   },
 }));
